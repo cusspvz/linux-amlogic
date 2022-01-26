@@ -1,0 +1,54 @@
+#include "coreelec_sm1.dtsi"
+
+/{
+	model = "Amlogic";
+	coreelec-dt-id = "sm1_s905x3_2g_dvb";
+
+
+	dvb_s_ts0_pins {
+		phandle = <0xad>;
+
+		tsin_a_ao {
+			groups = "tsin_a_sop_ao\0tsin_a_valid_ao\0tsin_a_clk_ao\0tsin_a_din0_ao";
+			function = "tsin_a_ao";
+		};
+	};
+
+	dvb_p_ts1_pins {
+		phandle = <0x72>;
+
+		tsin_b {
+			groups = "tsin_b_sop_z\0tsin_b_valid_z\0tsin_b_clk_z\0tsin_b_din0_z\0tsin_b_din1\0tsin_b_din2\0tsin_b_din3\0tsin_b_din4\0tsin_b_din5\0tsin_b_din6\0tsin_b_din7";
+			function = "tsin_b";
+		};
+	};
+
+	dvb {
+		compatible = "amlogic, dvb";
+		dev_name = "dvb";
+		dtv_demod0 = "avl68xx";
+		dtv_demod0_ts_id = <0x01>;
+		dtv_demod0_i2c_adap = <0x71>;
+		ts1 = "parallel";
+		ts1_control = <0x00>;
+		ts1_invert = <0x00>;
+		interrupts = <0x00 0x17 0x01 0x00 0x05 0x01 0x00 0x15 0x01 0x00 0x13 0x01 0x00 0x19 0x01 0x00 0x12 0x01 0x00 0x18 0x01>;
+		interrupt-names = "demux0_irq\0demux1_irq\0demux2_irq\0dvr0_irq\0dvr1_irq\0dvrfill0_fill\0dvrfill1_flush";
+		pinctrl-names = "p_ts1";
+		pinctrl-0 = <0x72>;
+		clocks = <0x02 0x39 0x02 0x43 0x02 0x40>;
+		clock-names = "demux\0ahbarb0\0parser_top";
+		status = "okay";
+	};
+
+	dtv_params {
+		compatible = "dtv-params";
+		dev_name = "dtv-params";
+		demod_reset_1-gpio = <0x69 0x0a 0x00>;
+		ant_power_1-gpio = <0x69 0x0e 0x01>;
+		status = "okay";
+	};
+
+
+
+};
