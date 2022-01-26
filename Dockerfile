@@ -4,11 +4,12 @@ RUN apt-get update -y
 RUN apt-get install -y build-essential nano ncurses-dev
 RUN apt-get install -y git
 
-
-ENV ARCH=amd64
+# get the repo
 RUN git clone --depth 1 --branch feat/build-with-docker https://github.com/cusspvz/linux-amlogic /opt/linux-amlogic
+
+ENV ARCH=arm64
 WORKDIR /opt/linux-amlogic
-RUN make defconfig
+# RUN make defconfig
 
 
 
