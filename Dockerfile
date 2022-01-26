@@ -1,16 +1,15 @@
 FROM ubuntu:latest
 
 RUN apt-get update -y
-RUN apt-get install -y build-essential nano ncurses-dev
-RUN apt-get install -y git
+RUN apt-get install -y build-essential nano ncurses-dev git gcc-aarch64-linux-gnu
 
 # get the repo
 RUN git clone --depth 1 --branch feat/build-with-docker https://github.com/cusspvz/linux-amlogic /opt/linux-amlogic
 
 ENV ARCH=arm64
+ENV CROSS_COMPILE=/usr/bin/aarch64-linux-gnu-
 WORKDIR /opt/linux-amlogic
-# RUN make defconfig
-
+RUN make defconfig
 
 
 # In order to use this image for building the kernel, you need to execute the following command from the root of this repo:
