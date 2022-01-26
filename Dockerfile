@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+
+RUN apt-get update -y
+RUN apt-get install -y build-essential nano ncurses-dev
+
+ENV ARCH=amd64
+
+RUN make defconfig
